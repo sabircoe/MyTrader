@@ -1,0 +1,11 @@
+//version change
+mvn -s settings.xml versions:set -DnewVersion=1.0.2 -DappName=Check clean 
+//nexus deploy
+mvn -s settings.xml -DappName=Check clean deploy
+download artifact:
+mvn -DappName=Check -P download process-sources
+//tomcat deploy
+mvn -s settings.xml -DappName=Check -Pdev cargo:redeploy
+mvn -s settings.xml -DappName=Check -Pdev cargo:undeploy
+Sonar analysis :
+mvn -s settings.xml -DappName=Check verify sonar:sonar
